@@ -7,8 +7,8 @@ class Solution {
         }
         int count = 0;
         for(int x : freq) {
-            if(x < 0) {
-                count = count + -(x);
+            if(x > 0) {
+                count += x;
             }
         }
         return count;
