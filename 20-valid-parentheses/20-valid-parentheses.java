@@ -1,28 +1,27 @@
 class Solution {
     public boolean isValid(String s) {
+        Map<Character, Character> map = new HashMap<>();
+        map.put('(',')');
+        map.put('[',']');
+        map.put('{','}');
+        
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> brackets = new HashMap<>();
-        brackets.put('(',')');
-        brackets.put('{','}');
-        brackets.put('[',']');
         for(char c: s.toCharArray()) {
-            if(c != '}' && c != ']' && c != ')') {
-                stack.push(brackets.get(c));
+            if(map.containsKey(c)) {
+                stack.push(map.get(c));
             } else {
                 if(stack.isEmpty()) {
                     return false;
                 }
-
-                if(stack.pop() != c) {
+                
+                if(stack.peek() != c) {
                     return false;
                 }
+                
+                stack.pop();
             }
         }
-
-        if(stack.isEmpty()) {
-            return true;
-        }
-
-        return false;
+        
+        return stack.isEmpty();
     }
 }
